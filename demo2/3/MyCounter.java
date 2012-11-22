@@ -1,14 +1,12 @@
 public class MyCounter {
-    public static int counter=0;
+    public static volatile int counter=0;
 
     public static void main(String[] args) throws Exception {
         
         Runnable r = new Runnable(){
             public void run() {
                 for(int i=0;i<10000;i++) {
-                    synchronized(MyCounter.class) {
-                        counter++;
-                    }
+                    counter++;
                 }
             }
         };
