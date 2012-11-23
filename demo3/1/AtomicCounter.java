@@ -1,12 +1,13 @@
-public class MyCounter {
-    public static int counter=0;
+import java.util.concurrent.atomic.AtomicInteger;
 
+public class AtomicCounter {
+    public static AtomicInteger atomicInt = new AtomicInteger();
+    
     public static void main(String[] args) throws Exception {
-        
         Runnable r = new Runnable(){
             public void run() {
                 for(int i=0;i<10000;i++) {
-                    counter++;
+                    atomicInt.incrementAndGet();
                 }
             }
         };
@@ -15,6 +16,7 @@ public class MyCounter {
         Thread t2 = new Thread(r);
         t2.start();
         t1.join();t2.join();
-        System.out.println(counter);
+        System.out.println(atomicInt.intValue());
+
     }
 }
